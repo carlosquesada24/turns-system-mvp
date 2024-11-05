@@ -28,6 +28,8 @@ const TurnCreationForm = ({ onSubmit }: TurnCreationFormProps) => {
     typeof onSubmit === "function" && onSubmit(formValues);
   };
 
+  const isCreateTurnButtonDisabled = formValues.name.length < 1;
+
   return (
     <div>
       <Label htmlFor="name">Nombre</Label>
@@ -37,7 +39,12 @@ const TurnCreationForm = ({ onSubmit }: TurnCreationFormProps) => {
         onChange={(e) => handleInputChange("name", e.currentTarget.value)}
         placeholder="Carlos"
       />
-      <Button onClick={() => handleSubmit(formValues)}>Crear turno</Button>
+      <Button
+        disabled={isCreateTurnButtonDisabled}
+        onClick={() => handleSubmit(formValues)}
+      >
+        Crear turno
+      </Button>
     </div>
   );
 };
