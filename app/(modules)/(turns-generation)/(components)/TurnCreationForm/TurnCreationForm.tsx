@@ -10,8 +10,19 @@ interface TurnCreationFormProps {
   onSubmit: Function;
 }
 
+interface TurnCreationForm {
+  name: string;
+}
+
+const TURN_CREATION_FORM_EMPTY_STATE: TurnCreationForm = {
+  name: "",
+};
+
 const TurnCreationForm = ({ onSubmit }: TurnCreationFormProps) => {
-  const { values: formValues, handleInputChange } = useForm({ name: "" }, {});
+  const { values: formValues, handleInputChange } = useForm(
+    TURN_CREATION_FORM_EMPTY_STATE,
+    {}
+  );
 
   const handleSubmit = (formValues: any) => {
     typeof onSubmit === "function" && onSubmit(formValues);
