@@ -6,10 +6,10 @@ import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCr
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
 
-  const onCreateTurn = () => {
+  const onCreateTurn = (formValues: any) => {
     alert("Turn created");
 
-    setTurnsList([...turnsList, { name: "Carlos" }]);
+    setTurnsList([...turnsList, formValues]);
   };
 
   return (
