@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 
 import turnsSupabaseRepository from "./(modules)/(turns-generation)/(repositories)/turnsSupabaseRepository";
 
-import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCreationForm/TurnCreationForm";
-import { Button } from "@/components/ui/button";
+import UsersTurnInformation from "./(modules)/(turns-generation)/(components)/UsersTurnInformation/UsersTurnInformation";
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
@@ -36,15 +35,8 @@ export default function Home() {
     <div className="">
       {/* <TurnCreationForm onSubmit={onCreateTurn} /> */}
 
-      {/* Información de turno del usuario */}
-      <div className="text-center">
-        <h3>Superman</h3>
-        <div>
-          <h2>Su turno es</h2>
-          <h1>#1</h1>
-        </div>
-        <Button variant="destructive">Cancelar turno</Button>
-      </div>
+      {/* User's turn information */}
+      {/* <UsersTurnInformation /> */}
 
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
