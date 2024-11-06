@@ -6,10 +6,37 @@ import turnsSupabaseRepository from "./(modules)/(turns-generation)/(repositorie
 
 import UsersTurnInformation from "./(modules)/(turns-generation)/(components)/UsersTurnInformation/UsersTurnInformation";
 import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCreationForm/TurnCreationForm";
+import useLocalStorage from "./(hooks)/useLocalStorage";
+
+interface TurnsAppLocalStorage {
+  userTurn:
+    | {
+        id: string;
+        name: string;
+        position: number;
+      }
+    | {};
+}
+
+const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
+  userTurn: {},
+};
+
+const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
+  userTurn: {
+    id: "b7b24505-7d94-40f5-b98b-eba119c672bf",
+    name: "The best superheroe",
+    position: 1,
+  },
+};
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
   const [isTurnCreated, setIsTurnCreated] = useState(false);
+
+  const {
+    storedValue: { userTurn },
+  } = useLocalStorage("turnsApp", TURNS_APP_EMPTY_STATE);
 
   useEffect(() => {
     const handleFetchAllTurns = async () => {
