@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import turnsSupabaseRepository from "./(modules)/(turns-generation)/(repositories)/turnsSupabaseRepository";
 
 import UsersTurnInformation from "./(modules)/(turns-generation)/(components)/UsersTurnInformation/UsersTurnInformation";
+import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCreationForm/TurnCreationForm";
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
@@ -33,7 +34,7 @@ export default function Home() {
 
   return (
     <div className="">
-      {/* <TurnCreationForm onSubmit={onCreateTurn} /> */}
+      <TurnCreationForm onSubmit={onCreateTurn} />
 
       {/* User's turn information */}
       {/* <UsersTurnInformation /> */}
