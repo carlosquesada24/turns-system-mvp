@@ -3,6 +3,7 @@ import supabase from "@/app/(utils)/supabase"
 interface Turn {
     id: string;
     name: string;
+    position: number;
 }
 
 interface TurnSupabase extends Turn {
@@ -20,7 +21,7 @@ const getAllTurns = async (): Promise<Turn[]> => {
     return data as Turn[]
 }
 
-const saveTurn = async (turn: Turn) => {
+const saveTurn = async (turn: Turn): Promise<Turn> => {
     const result = await supabase.from("Turns").upsert(turn).select()
 
     if (result.error) {
