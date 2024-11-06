@@ -21,7 +21,17 @@ const getAllTurns = async (): Promise<Turn[]> => {
 }
 
 const saveTurn = async (turn: Turn) => {
-    return await supabase.from("Turns").insert(turn);
+    const result = await supabase.from("Turns").upsert(turn).select()
+
+    if (result.error) {
+        console.log(result.error)
+    }
+
+    const isResultValid = result.data && Array.isArray(result.data)
+
+    const turnInserted = isResultValid ? result.data[0] : {}
+
+    return turnInserted
 }
 
 export default {
