@@ -32,11 +32,14 @@ const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
-  const [isTurnCreated, setIsTurnCreated] = useState(false);
 
   const {
     storedValue: { userTurn },
   } = useLocalStorage("turnsApp", TURNS_APP_EMPTY_STATE);
+
+  const [isTurnCreated, setIsTurnCreated] = useState(
+    Object.keys(userTurn).length > 0
+  );
 
   useEffect(() => {
     const handleFetchAllTurns = async () => {
@@ -71,7 +74,12 @@ export default function Home() {
       {!isTurnCreated && <TurnCreationForm onSubmit={onCreateTurn} />}
 
       {/* User's turn information */}
-      {isTurnCreated && <UsersTurnInformation />}
+      {isTurnCreated && (
+        <UsersTurnInformation
+          clientName={userTurn.name}
+          turnNumber={userTurn.position}
+        />
+      )}
 
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
