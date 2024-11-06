@@ -95,16 +95,18 @@ export default function Home() {
       <p>---------------------------------------</p>
 
       {turnsList.length}
-      {turnsList.map((turn, index) => (
-        <div
-          key={index}
-          // className={`${
-          //   turn.name === "Superman" ? "bg-sky-600 text-white" : ""
-          // }`}
-        >
-          {turn.name} - #{turn.position}
-        </div>
-      ))}
+      {turnsList.map((turn, index) => {
+        const isUsersTurn = userTurn.id === turn.id;
+
+        return (
+          <div
+            key={index}
+            className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
+          >
+            {turn.name} - #{turn.position}
+          </div>
+        );
+      })}
     </div>
   );
 }
