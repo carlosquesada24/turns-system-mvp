@@ -19,13 +19,16 @@ const TURN_CREATION_FORM_EMPTY_STATE: TurnCreationForm = {
 };
 
 const TurnCreationForm = ({ onSubmit }: TurnCreationFormProps) => {
-  const { values: formValues, handleInputChange } = useForm(
-    TURN_CREATION_FORM_EMPTY_STATE,
-    {}
-  );
+  const {
+    values: formValues,
+    handleInputChange,
+    reset: clearForm,
+  } = useForm(TURN_CREATION_FORM_EMPTY_STATE, {});
 
   const handleSubmit = (formValues: any) => {
     typeof onSubmit === "function" && onSubmit(formValues);
+
+    clearForm();
   };
 
   const isCreateTurnButtonDisabled = formValues.name.length < 1;
@@ -38,6 +41,7 @@ const TurnCreationForm = ({ onSubmit }: TurnCreationFormProps) => {
         type="text"
         onChange={(e) => handleInputChange("name", e.currentTarget.value)}
         placeholder="Carlos"
+        value={formValues.name}
       />
       <Button
         disabled={isCreateTurnButtonDisabled}
