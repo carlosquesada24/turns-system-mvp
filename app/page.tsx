@@ -4,6 +4,7 @@ import UsersTurnInformation from "./(modules)/(turns-generation)/(components)/Us
 import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCreationForm/TurnCreationForm";
 
 import useTurns from "./(hooks)/useTurns";
+import TurnsList from "./(modules)/(turns-display)/(components)/(TurnsList)/TurnsList";
 
 interface TurnsAppLocalStorage {
   userTurn:
@@ -49,23 +50,7 @@ export default function Home() {
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
 
-      <div>
-        <h2 className="text-xl font-bold">Turnos pendientes</h2>
-        {turnsList &&
-          Array.isArray(turnsList) &&
-          turnsList?.map((turn, index) => {
-            const isUsersTurn = userTurn?.id === turn.id;
-
-            return (
-              <div
-                key={index}
-                className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
-              >
-                {turn.name} - #{turn.position}
-              </div>
-            );
-          })}
-      </div>
+      <TurnsList turnsList={turnsList ?? []} userTurnId={userTurn?.id ?? ""} />
     </div>
   );
 }
