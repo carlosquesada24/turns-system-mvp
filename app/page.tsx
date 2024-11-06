@@ -49,21 +49,23 @@ export default function Home() {
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
 
-      {turnsList && Array.isArray(turnsList) && turnsList?.length}
-      {turnsList &&
-        Array.isArray(turnsList) &&
-        turnsList?.map((turn, index) => {
-          const isUsersTurn = userTurn?.id === turn.id;
+      <div>
+        <h2 className="text-xl font-bold">Turnos pendientes</h2>
+        {turnsList &&
+          Array.isArray(turnsList) &&
+          turnsList?.map((turn, index) => {
+            const isUsersTurn = userTurn?.id === turn.id;
 
-          return (
-            <div
-              key={index}
-              className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
-            >
-              {turn.name} - #{turn.position}
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={index}
+                className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
+              >
+                {turn.name} - #{turn.position}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
