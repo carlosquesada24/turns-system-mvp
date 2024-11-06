@@ -96,7 +96,7 @@ export default function Home() {
 
       {turnsList.length}
       {turnsList.map((turn, index) => {
-        const isUsersTurn = userTurn.id === turn.id;
+        const isUsersTurn = userTurn?.id === turn.id;
 
         return (
           <div
