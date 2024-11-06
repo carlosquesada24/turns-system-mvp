@@ -9,6 +9,7 @@ import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCr
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
+  const [isTurnCreated, setIsTurnCreated] = useState(false);
 
   useEffect(() => {
     const handleFetchAllTurns = async () => {
@@ -22,29 +23,42 @@ export default function Home() {
   const onCreateTurn = async (formValues: any) => {
     alert("Turn created");
 
-    setTurnsList([...turnsList, formValues]);
-
-    const turnToSave = {
+    const turnToSaveOnSupabase = {
       ...formValues,
       id: crypto.randomUUID(),
     };
 
-    await turnsSupabaseRepository.saveTurn(turnToSave);
+    const savedTurn = await turnsSupabaseRepository.saveTurn(
+      turnToSaveOnSupabase
+    );
+
+    const turnToSave = savedTurn ?? turnToSaveOnSupabase;
+
+    // setTurnsList([...turnsList, formValues]);
+    setTurnsList([...turnsList, turnToSave]);
+    setIsTurnCreated(true);
   };
 
   return (
     <div className="">
-      <TurnCreationForm onSubmit={onCreateTurn} />
+      {!isTurnCreated && <TurnCreationForm onSubmit={onCreateTurn} />}
 
       {/* User's turn information */}
-      {/* <UsersTurnInformation /> */}
+      {isTurnCreated && <UsersTurnInformation />}
 
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
 
       {turnsList.length}
       {turnsList.map((turn, index) => (
-        <div key={index}>{turn.name}</div>
+        <div
+          key={index}
+          // className={`${
+          //   turn.name === "Superman" ? "bg-sky-600 text-white" : ""
+          // }`}
+        >
+          {turn.name} - #{turn.position}
+        </div>
       ))}
     </div>
   );
