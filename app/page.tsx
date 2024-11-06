@@ -24,21 +24,25 @@ const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
 
 const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
   userTurn: {
-    id: "b7b24505-7d94-40f5-b98b-eba119c672bf",
-    name: "The best superheroe",
-    position: 1,
+    id: "cb442e86-3848-441c-bc24-041ee215264e",
+    name: "Iron man",
+    position: "8",
   },
 };
 
 export default function Home() {
   const [turnsList, setTurnsList] = useState<any[]>([]);
 
-  const {
-    storedValue: { userTurn },
-  } = useLocalStorage("turnsApp", TURNS_APP_EMPTY_STATE);
+  const { storedValue, setValue } = useLocalStorage(
+    "turnsApp",
+    TURNS_APP_EMPTY_STATE
+  );
+  const { userTurn } = storedValue;
 
   const [isTurnCreated, setIsTurnCreated] = useState(
-    Object.keys(userTurn).length > 0
+    userTurn !== null &&
+      userTurn !== undefined &&
+      Object.keys(userTurn).length > 0
   );
 
   useEffect(() => {
@@ -66,6 +70,12 @@ export default function Home() {
 
     // setTurnsList([...turnsList, formValues]);
     setTurnsList([...turnsList, turnToSave]);
+
+    // Save in localStorage
+    setValue({
+      ...storedValue,
+      userTurn: turnToSave,
+    });
     setIsTurnCreated(true);
   };
 
