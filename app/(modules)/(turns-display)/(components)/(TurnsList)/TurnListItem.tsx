@@ -10,7 +10,7 @@ const TurnListItem = ({ turn, isUsersTurn }: TurnListItemProps) => {
 
   return (
     <div key={turn.id} className={listItemClassName}>
-      {turn.name} - #{turn.position}
+      {turn.name} - #{turn.number}
     </div>
   );
 };

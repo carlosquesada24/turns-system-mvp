@@ -3,7 +3,7 @@ export interface TurnsAppLocalStorage {
     | {
         id: string;
         name: string;
-        position: number;
+        number: number;
     }
     | {};
 }

@@ -3,7 +3,7 @@ import supabase from "@/app/(utils)/supabase"
 interface Turn {
     id: string;
     name: string;
-    position: number;
+    number: number;
 }
 
 interface TurnSupabase extends Turn {

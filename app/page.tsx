@@ -12,7 +12,7 @@ interface TurnsAppLocalStorage {
     | {
         id: string;
         name: string;
-        position: number;
+        number: number;
       }
     | {};
 }
@@ -25,7 +25,7 @@ const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
   userTurn: {
     id: "cb442e86-3848-441c-bc24-041ee215264e",
     name: "Iron man",
-    position: "8",
+    number: "8",
   },
 };
 
@@ -38,7 +38,7 @@ export default function Home() {
 
   const isBarberView = true;
 
-  const currentTurnNumber = turnsList[0]?.position;
+  const currentTurnNumber = turnsList[0]?.number;
 
   return (
     <div className="">
@@ -50,7 +50,7 @@ export default function Home() {
       {isTurnCreated && !isBarberView && (
         <UsersTurnInformation
           clientName={userTurn.name}
-          turnNumber={userTurn.position}
+          turnNumber={userTurn.number}
         />
       )}
 
