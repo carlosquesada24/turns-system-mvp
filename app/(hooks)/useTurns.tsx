@@ -43,7 +43,7 @@ const useTurns = () => {
     setIsTurnCreated(true);
   };
 
-  const saveTurnOnSupabase = async (turn: any): Promise<Turn> => {
+  const saveTurnOnSupabase = async (turn: Turn): Promise<Turn> => {
     return await turnsSupabaseRepository.saveTurn(turn);
   };
 

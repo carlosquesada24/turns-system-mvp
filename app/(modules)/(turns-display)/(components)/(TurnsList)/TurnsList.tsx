@@ -1,8 +1,9 @@
 import React from "react";
 import TurnListItem from "./TurnListItem";
+import { Turn } from "@/app/(models)/(turns)/interfaces";
 
 interface TurnsListProps {
-  turnsList: any[];
+  turnsList: Turn[];
   userTurnId: string;
   isClientView: boolean;
 }

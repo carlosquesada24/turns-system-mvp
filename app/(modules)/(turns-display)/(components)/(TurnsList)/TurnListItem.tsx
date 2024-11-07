@@ -1,7 +1,8 @@
 import React from "react";
+import { Turn } from "@/app/(models)/(turns)/interfaces";
 
 interface TurnListItemProps {
-  turn: any;
+  turn: Turn;
   isUsersTurn: boolean;
 }
 
