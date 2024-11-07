@@ -1,4 +1,5 @@
 import React from "react";
+import TurnListItem from "./TurnListItem";
 
 interface TurnsListProps {
   turnsList: any[];
@@ -16,17 +17,10 @@ const TurnsList = ({ turnsList, userTurnId }: TurnsListProps) => {
         {isEmptyArray ? (
           <h2>¡No hay turnos pendientes!</h2>
         ) : (
-          turnsList?.map((turn, index) => {
+          turnsList?.map((turn) => {
             const isUsersTurn = userTurnId === turn.id;
 
-            return (
-              <div
-                key={index}
-                className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
-              >
-                {turn.name} - #{turn.position}
-              </div>
-            );
+            return <TurnListItem turn={turn} isUsersTurn={isUsersTurn} />;
           })
         )}
       </div>
