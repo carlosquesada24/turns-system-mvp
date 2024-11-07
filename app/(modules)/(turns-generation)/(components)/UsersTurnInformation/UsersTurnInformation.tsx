@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "@/components/ui/button";
+import { CancelTurnModal } from "@/app/(modules)/(turns-adjustment)/(components)/CancelTurnModal/CancelTurnModal";
 
 interface UsersTurnInformationProps {
   clientName: string;
@@ -18,7 +18,8 @@ const UsersTurnInformation = ({
         <h2>Su turno es</h2>
         <h1>#{turnNumber}</h1>
       </div>
-      <Button variant="destructive">Cancelar turno</Button>
+
+      <CancelTurnModal />
     </div>
   );
 };
