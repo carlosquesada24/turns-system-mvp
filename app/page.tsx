@@ -4,66 +4,53 @@ import UsersTurnInformation from "./(modules)/(turns-generation)/(components)/Us
 import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCreationForm/TurnCreationForm";
 
 import useTurns from "./(hooks)/useTurns";
+import TurnsList from "./(modules)/(turns-display)/(components)/(TurnsList)/TurnsList";
+import BarbersTurnInformation from "./(modules)/(turns-display)/(components)/BarbersTurnInformation/BarbersTurnInformation";
+import useLocalStorage from "./(hooks)/useLocalStorage";
 
-interface TurnsAppLocalStorage {
-  userTurn:
-    | {
-        id: string;
-        name: string;
-        position: number;
-      }
-    | {};
-}
-
-const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
-  userTurn: {},
-};
-
-const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
-  userTurn: {
-    id: "cb442e86-3848-441c-bc24-041ee215264e",
-    name: "Iron man",
-    position: "8",
-  },
-};
+import { TURNS_APP_EMPTY_STATE } from "./(models)/(turns)/constants/localStorage";
 
 export default function Home() {
   const { turnsList, userTurn, isTurnCreated, saveTurn } = useTurns();
+
+  const {
+    storedValue: { isBarberUser },
+  } = useLocalStorage("turnsApp", TURNS_APP_EMPTY_STATE);
+  const isClientUser = !isBarberUser;
 
   const onCreateTurn = async (formValues: any) => {
     saveTurn(formValues);
   };
 
+  const currentTurnNumber = turnsList[0]?.number;
+
   return (
     <div className="">
-      {!isTurnCreated && <TurnCreationForm onSubmit={onCreateTurn} />}
+      {!isTurnCreated && isClientUser && (
+        <TurnCreationForm onSubmit={onCreateTurn} />
+      )}
 
       {/* User's turn information */}
-      {isTurnCreated && (
+      {isTurnCreated && isClientUser && (
         <UsersTurnInformation
           clientName={userTurn.name}
-          turnNumber={userTurn.position}
+          turnNumber={userTurn.number}
         />
+      )}
+
+      {/* Vista de barbero */}
+      {isBarberUser && (
+        <BarbersTurnInformation currentTurnNumber={currentTurnNumber} />
       )}
 
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
 
-      {turnsList && Array.isArray(turnsList) && turnsList?.length}
-      {turnsList &&
-        Array.isArray(turnsList) &&
-        turnsList?.map((turn, index) => {
-          const isUsersTurn = userTurn?.id === turn.id;
-
-          return (
-            <div
-              key={index}
-              className={`${isUsersTurn ? "bg-sky-600 text-white" : ""}`}
-            >
-              {turn.name} - #{turn.position}
-            </div>
-          );
-        })}
+      <TurnsList
+        turnsList={turnsList ?? []}
+        userTurnId={userTurn?.id ?? ""}
+        isClientView={isClientUser}
+      />
     </div>
   );
 }

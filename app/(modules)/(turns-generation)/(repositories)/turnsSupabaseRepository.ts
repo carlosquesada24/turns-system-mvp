@@ -1,16 +1,8 @@
 import supabase from "@/app/(utils)/supabase"
+import { Turn } from "@/app/(models)/(turns)/interfaces"
+import { TurnSupabase } from "@/app/(models)/(turns)/interfaces/supabase"
 
-interface Turn {
-    id: string;
-    name: string;
-    position: number;
-}
-
-interface TurnSupabase extends Turn {
-    createdAt: string
-}
-
-const getAllTurns = async (): Promise<Turn[]> => {
+const getAllTurns = async (): Promise<TurnSupabase[]> => {
     const { data, error } = await supabase.from('Turns')
         .select()
 
@@ -21,7 +13,7 @@ const getAllTurns = async (): Promise<Turn[]> => {
     return data as Turn[]
 }
 
-const saveTurn = async (turn: Turn): Promise<Turn> => {
+const saveTurn = async (turn: Turn): Promise<TurnSupabase> => {
     const result = await supabase.from("Turns").upsert(turn).select()
 
     if (result.error) {
