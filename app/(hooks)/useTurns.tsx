@@ -30,7 +30,7 @@ interface Turn {
 }
 
 const useTurns = () => {
-  const [turnsList, setTurnsList] = useState<any[]>([]);
+  const [turnsList, setTurnsList] = useState<Turn[]>([]);
 
   const { storedValue, setValue } = useLocalStorage(
     "turnsApp",
