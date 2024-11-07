@@ -6,6 +6,7 @@ import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCr
 import useTurns from "./(hooks)/useTurns";
 import TurnsList from "./(modules)/(turns-display)/(components)/(TurnsList)/TurnsList";
 import BarbersTurnInformation from "./(modules)/(turns-display)/(components)/BarbersTurnInformation/BarbersTurnInformation";
+import useLocalStorage from "./(hooks)/useLocalStorage";
 
 interface TurnsAppLocalStorage {
   userTurn:
@@ -35,24 +36,25 @@ const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
 export default function Home() {
   const { turnsList, userTurn, isTurnCreated, saveTurn } = useTurns();
 
+  const {
+    storedValue: { isBarberUser },
+  } = useLocalStorage("turnsApp", TURNS_APP_EMPTY_STATE);
+  const isClientUser = !isBarberUser;
+
   const onCreateTurn = async (formValues: any) => {
     saveTurn(formValues);
   };
 
-  const isBarberView = true;
-
   const currentTurnNumber = turnsList[0]?.number;
-
-  console.log({ turnsList });
 
   return (
     <div className="">
-      {!isTurnCreated && !isBarberView && (
+      {!isTurnCreated && isClientUser && (
         <TurnCreationForm onSubmit={onCreateTurn} />
       )}
 
       {/* User's turn information */}
-      {isTurnCreated && !isBarberView && (
+      {isTurnCreated && isClientUser && (
         <UsersTurnInformation
           clientName={userTurn.name}
           turnNumber={userTurn.number}
@@ -60,7 +62,7 @@ export default function Home() {
       )}
 
       {/* Vista de barbero */}
-      {isBarberView && (
+      {isBarberUser && (
         <BarbersTurnInformation currentTurnNumber={currentTurnNumber} />
       )}
 
@@ -70,7 +72,7 @@ export default function Home() {
       <TurnsList
         turnsList={turnsList ?? []}
         userTurnId={userTurn?.id ?? ""}
-        isClientView={!isBarberView}
+        isClientView={isClientUser}
       />
     </div>
   );
