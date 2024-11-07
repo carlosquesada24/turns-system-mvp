@@ -14,11 +14,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 interface CancelTurnModalProps {
+  turnId: string;
   clientName: string;
-  deleteTurn: () => void;
+  deleteTurn: (turnId: string) => void;
 }
 
 export function CancelTurnModal({
+  turnId,
   clientName,
   deleteTurn,
 }: CancelTurnModalProps) {
@@ -32,7 +34,7 @@ export function CancelTurnModal({
 
   const handleContinue = () => {
     reset();
-    deleteTurn();
+    deleteTurn(turnId);
   };
 
   return (

@@ -36,6 +36,7 @@ export default function Home() {
         <UsersTurnInformation
           clientName={userTurn.name}
           turnNumber={userTurn.number}
+          turnId={userTurn.id}
           deleteTurn={deleteTurn}
         />
       )}

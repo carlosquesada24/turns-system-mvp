@@ -3,12 +3,14 @@ import React from "react";
 import { CancelTurnModal } from "@/app/(modules)/(turns-adjustment)/(components)/CancelTurnModal/CancelTurnModal";
 
 interface UsersTurnInformationProps {
+  turnId: string;
   clientName: string;
   turnNumber: number;
-  deleteTurn: () => void;
+  deleteTurn: (turnId: string) => void;
 }
 
 const UsersTurnInformation = ({
+  turnId,
   clientName,
   turnNumber,
   deleteTurn,
@@ -21,7 +23,11 @@ const UsersTurnInformation = ({
         <h1>#{turnNumber}</h1>
       </div>
 
-      <CancelTurnModal clientName={clientName} deleteTurn={deleteTurn} />
+      <CancelTurnModal
+        turnId={turnId}
+        clientName={clientName}
+        deleteTurn={deleteTurn}
+      />
     </div>
   );
 };
