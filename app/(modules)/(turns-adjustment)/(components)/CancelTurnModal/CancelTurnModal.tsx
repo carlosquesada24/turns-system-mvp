@@ -16,10 +16,11 @@ import { Input } from "@/components/ui/input";
 export function CancelTurnModal() {
   const clientName = "Iron man";
 
-  const { values: formValues, handleInputChange } = useForm(
-    { clientName: "" },
-    {}
-  );
+  const {
+    values: formValues,
+    handleInputChange,
+    reset,
+  } = useForm({ clientName: "" }, {});
 
   const isContinueButtonDisabled = formValues.clientName !== clientName;
 
@@ -50,8 +51,13 @@ export function CancelTurnModal() {
           />
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel>Volver atrás</AlertDialogCancel>
-          <AlertDialogAction disabled={isContinueButtonDisabled}>
+          <AlertDialogCancel onClick={() => reset()}>
+            Volver atrás
+          </AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => reset()}
+            disabled={isContinueButtonDisabled}
+          >
             Continuar
           </AlertDialogAction>
         </AlertDialogFooter>
