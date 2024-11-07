@@ -1,3 +1,4 @@
+import { useForm } from "@/app/(hooks)/useForm";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,24 +11,49 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export function CancelTurnModal() {
+  const clientName = "Iron man";
+
+  const { values: formValues, handleInputChange } = useForm(
+    { clientName: "" },
+    {}
+  );
+
+  const isContinueButtonDisabled = formValues.clientName !== clientName;
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
+        <Button variant="destructive">Cancelar turno</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Si continúa, no hay vuelta atrás
+          </AlertDialogDescription>
+          <AlertDialogDescription>
+            Digite su nombre: "Iron man" para cancelar turno
           </AlertDialogDescription>
         </AlertDialogHeader>
+        <div>
+          <Input
+            id="clientName"
+            type="text"
+            onChange={(e) =>
+              handleInputChange("clientName", e.currentTarget.value)
+            }
+            placeholder="Carlos"
+            value={formValues.clientName}
+          />
+        </div>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel>Volver atrás</AlertDialogCancel>
+          <AlertDialogAction disabled={isContinueButtonDisabled}>
+            Continuar
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
