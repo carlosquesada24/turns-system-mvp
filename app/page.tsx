@@ -15,10 +15,12 @@ interface TurnsAppLocalStorage {
         number: number;
       }
     | {};
+  isBarberUser: boolean;
 }
 
 const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
   userTurn: {},
+  isBarberUser: false,
 };
 
 const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
@@ -27,6 +29,7 @@ const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
     name: "Iron man",
     number: "8",
   },
+  isBarberUser: false,
 };
 
 export default function Home() {
@@ -39,6 +42,8 @@ export default function Home() {
   const isBarberView = true;
 
   const currentTurnNumber = turnsList[0]?.number;
+
+  console.log({ turnsList });
 
   return (
     <div className="">
