@@ -5,6 +5,7 @@ import TurnCreationForm from "./(modules)/(turns-generation)/(components)/TurnCr
 
 import useTurns from "./(hooks)/useTurns";
 import TurnsList from "./(modules)/(turns-display)/(components)/(TurnsList)/TurnsList";
+import { Button } from "@/components/ui/button";
 
 interface TurnsAppLocalStorage {
   userTurn:
@@ -35,22 +36,42 @@ export default function Home() {
     saveTurn(formValues);
   };
 
+  const isBarberView = true;
+
   return (
     <div className="">
-      {!isTurnCreated && <TurnCreationForm onSubmit={onCreateTurn} />}
+      {!isTurnCreated && !isBarberView && (
+        <TurnCreationForm onSubmit={onCreateTurn} />
+      )}
 
       {/* User's turn information */}
-      {isTurnCreated && (
+      {isTurnCreated && !isBarberView && (
         <UsersTurnInformation
           clientName={userTurn.name}
           turnNumber={userTurn.position}
         />
       )}
 
+      {/* Vista de barbero */}
+      {isBarberView && (
+        <div className="text-center">
+          {/* <h3>T</h3> */}
+          <div>
+            <h2>Turno actual</h2>
+            <h1>#19</h1>
+          </div>
+          <Button variant="default">Siguiente</Button>
+        </div>
+      )}
+
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
 
-      <TurnsList turnsList={turnsList ?? []} userTurnId={userTurn?.id ?? ""} />
+      <TurnsList
+        turnsList={turnsList ?? []}
+        userTurnId={userTurn?.id ?? ""}
+        isClientView={!isBarberView}
+      />
     </div>
   );
 }
