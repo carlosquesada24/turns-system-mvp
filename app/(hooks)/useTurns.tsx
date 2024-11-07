@@ -54,8 +54,16 @@ const useTurns = () => {
     });
   };
 
-  const deleteTurn = () => {
+  const deleteTurn = (turnId: string) => {
+    deleteTurnOnLocalStorage();
+    deleteTurnOnSupabase(turnId);
+  };
+
+  const deleteTurnOnLocalStorage = () =>
     setValue({ userTurn: {}, isBarberUser: false });
+
+  const deleteTurnOnSupabase = async (turnId: string) => {
+    await turnsSupabaseRepository.deleteTurn(turnId);
   };
 
   return {
