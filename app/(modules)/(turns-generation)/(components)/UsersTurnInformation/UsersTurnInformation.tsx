@@ -19,7 +19,7 @@ const UsersTurnInformation = ({
         <h1>#{turnNumber}</h1>
       </div>
 
-      <CancelTurnModal />
+      <CancelTurnModal clientName={clientName} />
     </div>
   );
 };

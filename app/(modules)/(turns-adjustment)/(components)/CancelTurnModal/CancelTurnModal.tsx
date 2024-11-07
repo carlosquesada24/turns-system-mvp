@@ -13,9 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function CancelTurnModal() {
-  const clientName = "Iron man";
+interface CancelTurnModalProps {
+  clientName: string;
+}
 
+export function CancelTurnModal({ clientName }: CancelTurnModalProps) {
   const {
     values: formValues,
     handleInputChange,
@@ -36,7 +38,7 @@ export function CancelTurnModal() {
             Si continúa, no hay vuelta atrás
           </AlertDialogDescription>
           <AlertDialogDescription>
-            Digite su nombre: "Iron man" para cancelar turno
+            Digite su nombre: "{clientName}" para cancelar turno
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div>
@@ -46,7 +48,7 @@ export function CancelTurnModal() {
             onChange={(e) =>
               handleInputChange("clientName", e.currentTarget.value)
             }
-            placeholder="Carlos"
+            placeholder="Su nombre"
             value={formValues.clientName}
           />
         </div>
