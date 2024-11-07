@@ -8,30 +8,7 @@ import TurnsList from "./(modules)/(turns-display)/(components)/(TurnsList)/Turn
 import BarbersTurnInformation from "./(modules)/(turns-display)/(components)/BarbersTurnInformation/BarbersTurnInformation";
 import useLocalStorage from "./(hooks)/useLocalStorage";
 
-interface TurnsAppLocalStorage {
-  userTurn:
-    | {
-        id: string;
-        name: string;
-        number: number;
-      }
-    | {};
-  isBarberUser: boolean;
-}
-
-const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
-  userTurn: {},
-  isBarberUser: false,
-};
-
-const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
-  userTurn: {
-    id: "cb442e86-3848-441c-bc24-041ee215264e",
-    name: "Iron man",
-    number: "8",
-  },
-  isBarberUser: false,
-};
+import { TURNS_APP_EMPTY_STATE } from "./(models)/(turns)/constants/localStorage";
 
 export default function Home() {
   const { turnsList, userTurn, isTurnCreated, saveTurn } = useTurns();

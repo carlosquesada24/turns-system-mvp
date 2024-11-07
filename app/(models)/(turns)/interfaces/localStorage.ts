@@ -6,4 +6,5 @@ export interface TurnsAppLocalStorage {
         number: number;
     }
     | {};
+    isBarberUser: boolean;
 }

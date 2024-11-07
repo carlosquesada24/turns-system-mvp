@@ -3,6 +3,7 @@ import { TurnsAppLocalStorage } from "../interfaces/localStorage";
 
 export const TURNS_APP_EMPTY_STATE: TurnsAppLocalStorage = {
     userTurn: {},
+    isBarberUser: false,
 };
 
 export const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
@@ -11,6 +12,7 @@ export const TURNS_APP_NORMAL_STATE: TurnsAppLocalStorage = {
         name: "Iron man",
         number: "8",
     },
+    isBarberUser: false,
 };
 
 
