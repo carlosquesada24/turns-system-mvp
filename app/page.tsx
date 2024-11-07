@@ -38,7 +38,7 @@ export default function Home() {
 
   const isBarberView = true;
 
-  const currentTurnNumber = turnsList[0].position;
+  const currentTurnNumber = turnsList[0]?.position;
 
   return (
     <div className="">
