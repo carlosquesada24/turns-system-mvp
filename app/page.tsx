@@ -38,6 +38,8 @@ export default function Home() {
 
   const isBarberView = true;
 
+  const currentTurnNumber = turnsList[0].position;
+
   return (
     <div className="">
       {!isTurnCreated && !isBarberView && (
@@ -53,7 +55,9 @@ export default function Home() {
       )}
 
       {/* Vista de barbero */}
-      {isBarberView && <BarbersTurnInformation currentTurnNumber={2} />}
+      {isBarberView && (
+        <BarbersTurnInformation currentTurnNumber={currentTurnNumber} />
+      )}
 
       <p>---------------------------------------</p>
       <p>---------------------------------------</p>
