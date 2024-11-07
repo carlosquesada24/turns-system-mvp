@@ -4,9 +4,10 @@ import TurnListItem from "./TurnListItem";
 interface TurnsListProps {
   turnsList: any[];
   userTurnId: string;
+  isClientView: boolean;
 }
 
-const TurnsList = ({ turnsList, userTurnId }: TurnsListProps) => {
+const TurnsList = ({ turnsList, userTurnId, isClientView }: TurnsListProps) => {
   const isValidArray = turnsList && Array.isArray(turnsList);
   const isEmptyArray = isValidArray && turnsList.length === 0;
 
@@ -18,7 +19,7 @@ const TurnsList = ({ turnsList, userTurnId }: TurnsListProps) => {
           <h2>¡No hay turnos pendientes!</h2>
         ) : (
           turnsList?.map((turn) => {
-            const isUsersTurn = userTurnId === turn.id;
+            const isUsersTurn = isClientView && userTurnId === turn.id;
 
             return <TurnListItem turn={turn} isUsersTurn={isUsersTurn} />;
           })
