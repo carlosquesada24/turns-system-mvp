@@ -54,11 +54,16 @@ const useTurns = () => {
     });
   };
 
+  const deleteTurn = () => {
+    setValue({ userTurn: {}, isBarberUser: false });
+  };
+
   return {
     turnsList,
     userTurn,
     isTurnCreated,
     saveTurn,
+    deleteTurn,
   };
 };
 

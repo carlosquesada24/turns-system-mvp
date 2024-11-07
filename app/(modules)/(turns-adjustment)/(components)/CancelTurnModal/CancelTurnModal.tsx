@@ -15,9 +15,13 @@ import { Input } from "@/components/ui/input";
 
 interface CancelTurnModalProps {
   clientName: string;
+  deleteTurn: () => void;
 }
 
-export function CancelTurnModal({ clientName }: CancelTurnModalProps) {
+export function CancelTurnModal({
+  clientName,
+  deleteTurn,
+}: CancelTurnModalProps) {
   const {
     values: formValues,
     handleInputChange,
@@ -25,6 +29,11 @@ export function CancelTurnModal({ clientName }: CancelTurnModalProps) {
   } = useForm({ clientName: "" }, {});
 
   const isContinueButtonDisabled = formValues.clientName !== clientName;
+
+  const handleContinue = () => {
+    reset();
+    deleteTurn();
+  };
 
   return (
     <AlertDialog>
@@ -57,7 +66,7 @@ export function CancelTurnModal({ clientName }: CancelTurnModalProps) {
             Volver atrás
           </AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => reset()}
+            onClick={handleContinue}
             disabled={isContinueButtonDisabled}
           >
             Continuar

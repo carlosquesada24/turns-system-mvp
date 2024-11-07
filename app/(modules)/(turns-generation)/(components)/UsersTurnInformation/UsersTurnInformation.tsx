@@ -5,11 +5,13 @@ import { CancelTurnModal } from "@/app/(modules)/(turns-adjustment)/(components)
 interface UsersTurnInformationProps {
   clientName: string;
   turnNumber: number;
+  deleteTurn: () => void;
 }
 
 const UsersTurnInformation = ({
   clientName,
   turnNumber,
+  deleteTurn,
 }: UsersTurnInformationProps) => {
   return (
     <div className="text-center">
@@ -19,7 +21,7 @@ const UsersTurnInformation = ({
         <h1>#{turnNumber}</h1>
       </div>
 
-      <CancelTurnModal clientName={clientName} />
+      <CancelTurnModal clientName={clientName} deleteTurn={deleteTurn} />
     </div>
   );
 };
