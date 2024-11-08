@@ -54,11 +54,32 @@ const useTurns = () => {
     });
   };
 
+  const deleteTurn = (turnId: string) => {
+    deleteTurnOnLocalStorage();
+    deleteTurnOnSupabase(turnId);
+
+    // Remove turn from turnsList
+    const updatedTurnsList = turnsList.filter((turn) => turn.id !== turnId);
+    setTurnsList(updatedTurnsList);
+
+    setIsTurnCreated(false);
+
+    alert("Turn deleted successfully");
+  };
+
+  const deleteTurnOnLocalStorage = () =>
+    setValue({ userTurn: {}, isBarberUser: false });
+
+  const deleteTurnOnSupabase = async (turnId: string) => {
+    await turnsSupabaseRepository.deleteTurn(turnId);
+  };
+
   return {
     turnsList,
     userTurn,
     isTurnCreated,
     saveTurn,
+    deleteTurn,
   };
 };
 
