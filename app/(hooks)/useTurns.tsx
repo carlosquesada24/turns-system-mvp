@@ -3,6 +3,7 @@ import useLocalStorage from "./useLocalStorage";
 import turnsSupabaseRepository from "../(modules)/(turns-generation)/(repositories)/turnsSupabaseRepository";
 import { Turn } from "../(models)/(turns)/interfaces";
 import { TURNS_APP_EMPTY_STATE } from "../(models)/(turns)/constants/localStorage";
+import supabase from "../(utils)/supabase";
 
 const useTurns = () => {
   const [turnsList, setTurnsList] = useState<Turn[]>([]);
@@ -55,6 +56,18 @@ const useTurns = () => {
     };
 
     handleFetchAllTurns();
+
+    const channels = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "Turns" },
+        (payload) => {
+          console.log("Change received!", payload);
+          handleFetchAllTurns();
+        }
+      )
+      .subscribe();
   }, []);
 
   const saveTurn = async (formValues: any) => {
