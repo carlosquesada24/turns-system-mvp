@@ -11,7 +11,8 @@ import useLocalStorage from "./(hooks)/useLocalStorage";
 import { TURNS_APP_EMPTY_STATE } from "./(models)/(turns)/constants/localStorage";
 
 export default function Home() {
-  const { turnsList, userTurn, isTurnCreated, saveTurn } = useTurns();
+  const { turnsList, userTurn, isTurnCreated, saveTurn, deleteTurn } =
+    useTurns();
 
   const {
     storedValue: { isBarberUser },
@@ -35,6 +36,8 @@ export default function Home() {
         <UsersTurnInformation
           clientName={userTurn.name}
           turnNumber={userTurn.number}
+          turnId={userTurn.id}
+          deleteTurn={deleteTurn}
         />
       )}
 

@@ -27,7 +27,19 @@ const saveTurn = async (turn: Turn): Promise<TurnSupabase> => {
     return turnInserted
 }
 
+const deleteTurn = async (turnId: string) => {
+    const { error } = await supabase
+        .from('Turns')
+        .delete()
+        .eq('id', turnId)
+
+    if (error) {
+        console.error(error)
+    }
+}
+
 export default {
     getAllTurns,
     saveTurn,
+    deleteTurn
 }
