@@ -16,6 +16,7 @@ export default function Home() {
     userTurn,
     isTurnCreated,
     currentTurnNumber,
+    isLastTurn,
     saveTurn,
     deleteTurn,
     advanceTurn,
@@ -50,6 +51,7 @@ export default function Home() {
       {isBarberUser && (
         <BarbersTurnInformation
           currentTurnNumber={currentTurnNumber}
+          isLastTurn={isLastTurn}
           advanceTurn={advanceTurn}
         />
       )}

@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 
 interface BarbersTurnInformationProps {
   currentTurnNumber: number;
+  isLastTurn: boolean;
   advanceTurn: () => void;
 }
 
 const BarbersTurnInformation = ({
   currentTurnNumber,
+  isLastTurn,
   advanceTurn,
 }: BarbersTurnInformationProps) => {
   return (
@@ -16,7 +18,7 @@ const BarbersTurnInformation = ({
         <h2>Turno actual</h2>
         <h1>#{currentTurnNumber}</h1>
       </div>
-      <Button variant="default" onClick={advanceTurn}>
+      <Button disabled={isLastTurn} variant="default" onClick={advanceTurn}>
         Siguiente
       </Button>
     </div>
