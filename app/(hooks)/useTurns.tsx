@@ -12,6 +12,14 @@ const useTurns = () => {
   );
   const [isLastTurn, setIsLastTurn] = useState<boolean>(false);
 
+  const changeLastTurnDisability = (turnsList: Turn[]) => {
+    if (turnsList.length === 1) {
+      setIsLastTurn(true);
+    } else {
+      setIsLastTurn(false);
+    }
+  };
+
   const advanceTurn = () => {
     // Remove current turn from turnsList
     // - supabase
@@ -26,11 +34,7 @@ const useTurns = () => {
     const nextTurn = updatedTurnsList[0].number;
     setCurrentTurnNumber(nextTurn);
 
-    if (updatedTurnsList.length === 1) {
-      setIsLastTurn(true);
-    } else {
-      setIsLastTurn(false);
-    }
+    changeLastTurnDisability(updatedTurnsList);
 
     alert(`Turno ha sido avanzado con éxito`);
   };
@@ -63,6 +67,8 @@ const useTurns = () => {
       setTurnsList(sortedTurnsList);
 
       setCurrentTurnNumber(fetchedTurnsList[0].number);
+
+      changeLastTurnDisability(fetchedTurnsList);
     };
 
     handleFetchAllTurns();
