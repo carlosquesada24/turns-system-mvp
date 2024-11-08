@@ -9,6 +9,7 @@ const useTurns = () => {
   const [currentTurnNumber, setCurrentTurnNumber] = useState<number>(
     turnsList.length > 0 ? turnsList[0].number : 0
   );
+  const [isLastTurn, setIsLastTurn] = useState<boolean>(false);
 
   const advanceTurn = () => {
     // Remove current turn from turnsList
@@ -23,6 +24,12 @@ const useTurns = () => {
     // Update currentTurnNumber
     const nextTurn = updatedTurnsList[0].number;
     setCurrentTurnNumber(nextTurn);
+
+    if (updatedTurnsList.length === 1) {
+      setIsLastTurn(true);
+    } else {
+      setIsLastTurn(false);
+    }
 
     alert(`Turno ha sido avanzado con éxito`);
   };
@@ -101,6 +108,7 @@ const useTurns = () => {
     userTurn,
     isTurnCreated,
     currentTurnNumber,
+    isLastTurn,
     saveTurn,
     deleteTurn,
     advanceTurn,
