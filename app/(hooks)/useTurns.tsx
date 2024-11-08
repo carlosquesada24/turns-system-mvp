@@ -57,6 +57,12 @@ const useTurns = () => {
   const deleteTurn = (turnId: string) => {
     deleteTurnOnLocalStorage();
     deleteTurnOnSupabase(turnId);
+
+    // Remove turn from turnsList
+    const updatedTurnsList = turnsList.filter((turn) => turn.id !== turnId);
+    setTurnsList(updatedTurnsList);
+
+    setIsTurnCreated(false);
   };
 
   const deleteTurnOnLocalStorage = () =>
