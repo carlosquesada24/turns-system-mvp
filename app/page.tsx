@@ -11,8 +11,15 @@ import useLocalStorage from "./(hooks)/useLocalStorage";
 import { TURNS_APP_EMPTY_STATE } from "./(models)/(turns)/constants/localStorage";
 
 export default function Home() {
-  const { turnsList, userTurn, isTurnCreated, saveTurn, deleteTurn } =
-    useTurns();
+  const {
+    turnsList,
+    userTurn,
+    isTurnCreated,
+    currentTurnNumber,
+    saveTurn,
+    deleteTurn,
+    advanceTurn,
+  } = useTurns();
 
   const {
     storedValue: { isBarberUser },
@@ -22,8 +29,6 @@ export default function Home() {
   const onCreateTurn = async (formValues: any) => {
     saveTurn(formValues);
   };
-
-  const currentTurnNumber = turnsList[0]?.number;
 
   return (
     <div className="">
@@ -43,7 +48,10 @@ export default function Home() {
 
       {/* Vista de barbero */}
       {isBarberUser && (
-        <BarbersTurnInformation currentTurnNumber={currentTurnNumber} />
+        <BarbersTurnInformation
+          currentTurnNumber={currentTurnNumber}
+          advanceTurn={advanceTurn}
+        />
       )}
 
       <p>---------------------------------------</p>
