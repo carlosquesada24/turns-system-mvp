@@ -47,10 +47,20 @@ const useTurns = () => {
       Object.keys(userTurn).length > 0
   );
 
+  const sortTurnsList = (turnsList: Turn[]) => {
+    return turnsList.sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    );
+  };
+
   useEffect(() => {
     const handleFetchAllTurns = async () => {
       const fetchedTurnsList = await turnsSupabaseRepository.getAllTurns();
-      setTurnsList(fetchedTurnsList);
+
+      // Sort turnsList by created_at
+      const sortedTurnsList = sortTurnsList(fetchedTurnsList);
+      setTurnsList(sortedTurnsList);
 
       setCurrentTurnNumber(fetchedTurnsList[0].number);
     };
