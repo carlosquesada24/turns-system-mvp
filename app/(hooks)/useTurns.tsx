@@ -10,7 +10,16 @@ const useTurns = () => {
     turnsList.length > 0 ? turnsList[0].number : 0
   );
 
-  const advanceTurn = () => {};
+  const advanceTurn = () => {
+    const newTurnsList = turnsList.slice(1);
+
+    const nextTurn = newTurnsList[0].number;
+
+    setTurnsList(newTurnsList);
+    setCurrentTurnNumber(nextTurn);
+
+    alert(`Next turn is: ${nextTurn}`);
+  };
 
   const { storedValue, setValue } = useLocalStorage(
     "turnsApp",
