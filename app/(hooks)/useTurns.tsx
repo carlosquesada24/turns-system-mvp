@@ -63,6 +63,8 @@ const useTurns = () => {
     setTurnsList(updatedTurnsList);
 
     setIsTurnCreated(false);
+
+    alert("Turn deleted successfully");
   };
 
   const deleteTurnOnLocalStorage = () =>
