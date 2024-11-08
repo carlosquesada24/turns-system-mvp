@@ -11,14 +11,20 @@ const useTurns = () => {
   );
 
   const advanceTurn = () => {
-    const newTurnsList = turnsList.slice(1);
+    // Remove current turn from turnsList
+    // - supabase
+    const turnToDeleteOnSupabase = turnsList[0];
+    deleteTurnOnSupabase(turnToDeleteOnSupabase.id);
 
-    const nextTurn = newTurnsList[0].number;
+    // Filter turnsList array locally
+    const updatedTurnsList = turnsList.slice(1);
+    setTurnsList(updatedTurnsList);
 
-    setTurnsList(newTurnsList);
+    // Update currentTurnNumber
+    const nextTurn = updatedTurnsList[0].number;
     setCurrentTurnNumber(nextTurn);
 
-    alert(`Next turn is: ${nextTurn}`);
+    alert(`Turno ha sido avanzado con éxito`);
   };
 
   const { storedValue, setValue } = useLocalStorage(
