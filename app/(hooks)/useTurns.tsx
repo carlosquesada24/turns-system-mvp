@@ -6,6 +6,12 @@ import { TURNS_APP_EMPTY_STATE } from "../(models)/(turns)/constants/localStorag
 
 const useTurns = () => {
   const [turnsList, setTurnsList] = useState<Turn[]>([]);
+  const currentTurnNumber = turnsList.length > 0 ? turnsList[0].number : 0;
+
+  const advanceTurn = () => {
+    const nextTurn = currentTurnNumber + 1;
+    alert(`Next turn is: ${nextTurn}`);
+  };
 
   const { storedValue, setValue } = useLocalStorage(
     "turnsApp",
@@ -80,6 +86,7 @@ const useTurns = () => {
     isTurnCreated,
     saveTurn,
     deleteTurn,
+    advanceTurn,
   };
 };
 
